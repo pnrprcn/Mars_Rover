@@ -14,11 +14,30 @@ namespace Mars_Rover_Console
             string[] rover_Instructions;
             int i = 0, j = 0;
             int rover_count = 2;
-            string temp_input;
+            string temp_input="";
             int input_control_index = 0;
             char[] control_input_arr;
             int x_pleteau, y_pleteau;
 
+
+            
+
+            while (temp_input != "1")
+            {
+                Console.WriteLine("1-Start\n2-Settings\n3-Info");
+                temp_input = Console.ReadLine();
+                if(temp_input == "2")
+                {
+                    Console.WriteLine("rover count ="+ rover_count + "new value:");
+                    rover_count = int.Parse(Console.ReadLine());//bossa oldugu gibi kalsın
+                }else if(temp_input == "3")
+                {
+                    Console.WriteLine("Rover count is 2 in default. It can be reassigned in settings.After reassigning press 1 to start. \nPress a key to go back");
+                    Console.ReadKey();
+                }
+                Console.Clear();
+
+            }
             rover_Instructions = new string[(rover_count * 2) + 1];
 
             Console.Write("\nWIDTH AND LENGHT OF PLETEAU: ");
