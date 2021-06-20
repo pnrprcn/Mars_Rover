@@ -134,7 +134,7 @@ namespace Mars_Rover_Console
 
                 //rover direction
                 temp_Rover_Direc = intructions_array[i + 1].ToCharArray();
-                //moving rover
+                return_Value[return_index] = Move_Rover(temp_Rover_Direc, current_x, current_y, direction, x_lenght, y_lenght);
 
                 return_index++;
                 i = i + 2;
@@ -143,6 +143,76 @@ namespace Mars_Rover_Console
 
 
             return string.Join("\n", return_Value);
+        }
+
+        public static string Move_Rover(char[] temp_Rover_Info, int current_x, int current_y, string direction, int x_lenght, int y_lenght)
+        {
+            int i = 0, j = 0;
+            string return_Value;
+            //                   0    1    2    3
+            //direction_Map = [ 'N', 'E', 'S', 'W' ];
+
+
+            List<string> direction_Map = new List<string>();
+
+            direction_Map.Add("N");
+            direction_Map.Add("E");
+            direction_Map.Add("S");
+            direction_Map.Add("W");
+
+
+
+            int direction_Value = direction_Map.IndexOf(direction);
+
+
+            int count_Rover = 0;
+
+
+            while (temp_Rover_Info.Length > i)
+            {
+                if (temp_Rover_Info[i] == 'L')
+                {
+                    direction_Value = (((direction_Value - 1) % 4) + 4) % 4;
+                    direction = direction_Map[direction_Value];
+
+
+                }
+                else if (temp_Rover_Info[i] == 'R')
+                {
+                    direction_Value = (direction_Value + 1) % 4;
+                    direction = direction_Map[direction_Value];
+                }
+                else
+                {
+                    if (direction == "N" && current_y < y_lenght)
+                    {
+                        current_y++;
+
+                    }
+                    if (direction == "S" && current_y > 0)
+                    {
+                        current_y--;
+
+                    }
+                    if (direction == "E" && current_x < x_lenght)
+                    {
+                        current_x++;
+
+                    }
+                    if (direction == "W" && current_x > 0)
+                    {
+                        current_x--;
+
+                    }
+                }
+
+
+                i++;
+
+            }
+            return_Value = current_x + " " + current_y + " " + direction;
+
+            return return_Value;
         }
     }
 }
