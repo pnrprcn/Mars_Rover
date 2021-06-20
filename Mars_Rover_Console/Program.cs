@@ -69,7 +69,6 @@ namespace Mars_Rover_Console
                 rover_Instructions[i] = temp_input;
                 i++;
 
-                Console.WriteLine("ok");
 
 
             }
@@ -77,7 +76,7 @@ namespace Mars_Rover_Console
 
             Console.Write("---END OF INPUT---\nOUT:\n");
 
-            // Reading input here
+            Console.Write(Read_Instructions(rover_Instructions));
 
 
             Console.Write("\nPress any key to close the console.");
@@ -101,6 +100,49 @@ namespace Mars_Rover_Console
             }
 
             return true;
+        }
+
+        public static string Read_Instructions(string[] intructions_array)
+        {
+            string[] temp_Rover_Info;
+            string[] return_Value;
+            char[] temp_Rover_Direc;
+            char[] tmp;
+            int x_lenght, y_lenght, current_x = 0, current_y = 0, rover_count, return_index = 0;
+            int i = 0, j = 0; ;
+            string direction = null;
+
+            temp_Rover_Info = new string[100];
+
+
+            rover_count = (intructions_array.Length - 1) / 2;
+            return_Value = new string[rover_count];
+            //size of pleateu
+            temp_Rover_Info = intructions_array[0].Split(' ');
+            x_lenght = int.Parse(temp_Rover_Info[0]);
+            y_lenght = int.Parse(temp_Rover_Info[1]);
+
+            i++;
+
+
+            for (j = 0; j < rover_count; j++)
+            {
+                //rover position
+                current_x = int.Parse(intructions_array[i].Split(' ')[0]);
+                current_y = int.Parse(intructions_array[i].Split(' ')[1]);
+                direction = intructions_array[i].Split(' ')[2];
+
+                //rover direction
+                temp_Rover_Direc = intructions_array[i + 1].ToCharArray();
+                //moving rover
+
+                return_index++;
+                i = i + 2;
+            }
+
+
+
+            return string.Join("\n", return_Value);
         }
     }
 }
