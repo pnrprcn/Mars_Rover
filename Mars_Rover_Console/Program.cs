@@ -17,10 +17,10 @@ namespace Mars_Rover_Console
             string temp_input="";
             int input_control_index = 0;
             char[] control_input_arr;
-            int x_pleteau, y_pleteau;
+            int x_plateau, y_plateau;
 
 
-            
+
 
             while (temp_input != "1")
             {
@@ -29,8 +29,11 @@ namespace Mars_Rover_Console
                 if(temp_input == "2")
                 {
                     Console.WriteLine("rover count ="+ rover_count + "new value:");
-                    rover_count = int.Parse(Console.ReadLine());//bossa oldugu gibi kalsın
-                }else if(temp_input == "3")
+                    rover_count = int.Parse(Console.ReadLine());
+
+
+                }
+                else if(temp_input == "3")
                 {
                     Console.WriteLine("Rover count is 2 in default. It can be reassigned in settings.After reassigning press 1 to start. \nPress a key to go back");
                     Console.ReadKey();
@@ -40,7 +43,7 @@ namespace Mars_Rover_Console
             }
             rover_Instructions = new string[(rover_count * 2) + 1];
 
-            Console.Write("\nWIDTH AND LENGHT OF PLETEAU: ");
+            Console.Write("\nWIDTH AND LENGHT OF PLATEAU: ");
             temp_input = Console.ReadLine();
             control_input_arr = temp_input.ToCharArray();
             while (control_input_arr.Length != 3 || !Char.IsNumber(control_input_arr[0]) || !Char.IsWhiteSpace(control_input_arr[1]) || !Char.IsNumber(control_input_arr[2]))
@@ -49,8 +52,8 @@ namespace Mars_Rover_Console
                 temp_input = Console.ReadLine();
                 control_input_arr = temp_input.ToCharArray();
             }
-            x_pleteau = (int)char.GetNumericValue(control_input_arr[0]);
-            y_pleteau = (int)char.GetNumericValue(control_input_arr[2]);
+            x_plateau = (int)char.GetNumericValue(control_input_arr[0]);
+            y_plateau = (int)char.GetNumericValue(control_input_arr[2]);
             rover_Instructions[0] = temp_input;
             i = 1;
 
@@ -60,9 +63,9 @@ namespace Mars_Rover_Console
                 temp_input = Console.ReadLine();
                 control_input_arr = temp_input.ToCharArray();
                 while (control_input_arr.Length != 5 || !Char.IsNumber(control_input_arr[0]) || !Char.IsWhiteSpace(control_input_arr[1]) || !Char.IsNumber(control_input_arr[2]) || !Char.IsWhiteSpace(control_input_arr[3]) || !new[] { 'N', 'S', 'W', 'E' }.Contains(control_input_arr[4])
-                        || char.GetNumericValue(control_input_arr[0]) > x_pleteau || char.GetNumericValue(control_input_arr[2]) > x_pleteau)
+                        || char.GetNumericValue(control_input_arr[0]) > x_plateau || char.GetNumericValue(control_input_arr[2]) > x_plateau)
                 {
-                    Console.WriteLine("Wrong Input.. Input should be in boundaries of " + x_pleteau + "," + y_pleteau + "\nInput Example: 3 2 N (integer-space-integer-space-letter(N,S,W,E))\n");
+                    Console.WriteLine("Wrong Input.. Input should be in boundaries of " + x_plateau + "," + y_plateau + "\nInput Example: 3 2 N (integer-space-integer-space-letter(N,S,W,E))\n");
                     Console.Write((j + 1) + ". ROVER'S POSITION:");
                     temp_input = Console.ReadLine();
                     control_input_arr = temp_input.ToCharArray();
@@ -123,6 +126,7 @@ namespace Mars_Rover_Console
 
         public static string Read_Instructions(string[] intructions_array)
         {
+            //Reads size of plateau and multiple rovers position and instruction.Gives rovers position on the plateau
             string[] temp_Rover_Info;
             string[] return_Value;
             char[] temp_Rover_Direc;
@@ -144,7 +148,7 @@ namespace Mars_Rover_Console
             i++;
 
 
-            for (j = 0; j < rover_count; j++)
+            for (j = 0; j < rover_count; j++) // used for loop because count of rover is set.
             {
                 //rover position
                 current_x = int.Parse(intructions_array[i].Split(' ')[0]);
@@ -166,6 +170,7 @@ namespace Mars_Rover_Console
 
         public static string Move_Rover(char[] temp_Rover_Info, int current_x, int current_y, string direction, int x_lenght, int y_lenght)
         {
+            //Reads size of plateau and one rovers instruction,position,direction. Sends one rover's position.
             int i = 0, j = 0;
             string return_Value;
             //                   0    1    2    3
@@ -187,7 +192,7 @@ namespace Mars_Rover_Console
             int count_Rover = 0;
 
 
-            while (temp_Rover_Info.Length > i)
+            while (temp_Rover_Info.Length > i) //used while because rover direction string lenght is uncertain
             {
                 if (temp_Rover_Info[i] == 'L')
                 {

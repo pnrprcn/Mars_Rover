@@ -12,8 +12,8 @@ namespace Mars_Rover_Test
         public void Read_Instructions_Test()
         {
             string[] input_value, input_value2;
-            input_value = new string[] { "5 5", "1 1 N", "RMLM", "3 3 W", "LMLM" };// expected_answer
-            input_value2 = new string[] { "5 5", "1 1 N", "RMLM" };//expected_answer2
+            input_value = new string[] { "5 5", "1 1 N", "RMLM", "3 3 W", "LMLM" };// output: expected_answer
+            input_value2 = new string[] { "5 5", "1 1 N", "RMLM" };//output: expected_answer2
 
             string expected_answers = "2 2 N\n4 2 E";// put \n between answers for more than one rover's location.
             string expected_answers2 = "2 2 N";
